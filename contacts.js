@@ -1,28 +1,8 @@
 const fs = require("fs").promises;
 const path = require("path");
+const short = require("short-uuid");
 
 const contactsPath = path.resolve("./db/contacts.json");
-
-const readContacts = async () => {
-  try {
-    const data = await fs.readFile(contactsPath, "utf8");
-    console.log(data);
-  } catch (error) {
-    console.error(error.message);
-  }
-};
-const writeContacts = async () => {
-  try {
-    const rewriteData = await fs.writeFile(contactsPath, data);
-    console.log(rewriteData);
-  } catch (error) {
-    console.error(error.message);
-  }
-};
-module.exports = {
-  readContacts,
-  writeContacts,
-};
 
 async function listContacts() {
   try {
@@ -43,10 +23,48 @@ async function getContactById(contactId) {
   }
 }
 
-function removeContact(contactId) {
-  // ...твой код
+async function removeContact(contactId) {
+  try {
+    const contacts = await fs.readFile(contactsPath, "utf8");
+    const contactsArr = JSON.parse(contacts);
+    const contactsNew = contactsArr.filter(
+      (contact) => contact.id !== contactId
+    );
+    console.log("contactNew", contactsNew);
+    const newContacts = await fs.writeFile(
+      contactsPath,
+      JSON.stringify(contactsNew),
+      "utf8"
+    );
+    console.log(newContacts);
+  } catch (error) {
+    console.error(error.message);
+  }
 }
 
-function addContact(name, email, phone) {
-  // ...твой код
+async function addContact(name, email, phone) {
+  try {
+    const contacts = await fs.readFile(contactsPath, "utf8");
+    const contactsArr = JSON.parse(contacts);
+    const newContact = {
+      id: short.generate("0123456789"),
+      name,
+      email,
+      phone,
+    };
+    const newArr = contactsArr.push(newContact); // const newContactsArr = [...contactsArr, contactNew];
+    const newContacts = await fs.writeFile(
+      //why not fs.appendFile(filename, data, [options])
+      contactsPath,
+      JSON.stringify(newArr),
+      "utf8"
+    );
+    console.log(newContacts);
+  } catch {}
 }
+module.exports = {
+  listContacts,
+  getContactById,
+  removeContact,
+  addContact,
+};
