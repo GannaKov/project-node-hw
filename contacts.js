@@ -24,20 +24,19 @@ async function getContactById(id) {
   }
 }
 
-async function removeContact(contactId) {
+async function removeContact(id) {
   try {
     const contacts = await fs.readFile(contactsPath, "utf8");
     const contactsArr = JSON.parse(contacts);
-    const contactsNew = contactsArr.filter(
-      (contact) => contact.id !== contactId
-    );
-    console.log("contactNew", contactsNew);
-    const newContacts = await fs.writeFile(
-      contactsPath,
-      JSON.stringify(contactsNew),
-      "utf8"
-    );
-    console.log(newContacts);
+    const index = contactsArr.findIndex((item) => item.id === id);
+    if (index === -1) {
+      return null;
+    }
+    const result = contactsArr.splice(index, 1);
+    //const contactsNew = contactsArr.filter((contact) => contact.id !== id);
+
+    await fs.writeFile(contactsPath, JSON.stringify(contactsArr, null, 2));
+    return console.log("result", result);
   } catch (error) {
     console.error(error.message);
   }
@@ -53,15 +52,17 @@ async function addContact(name, email, phone) {
       email,
       phone,
     };
-    const newArr = contactsArr.push(newContact); // const newContactsArr = [...contactsArr, contactNew];
-    const newContacts = await fs.writeFile(
+    contactsArr.push(newContact); // const newContactsArr = [...contactsArr, contactNew];
+    await fs.writeFile(
       //why not fs.appendFile(filename, data, [options])
       contactsPath,
-      JSON.stringify(newArr),
+      JSON.stringify(contactsArr, null, 2),
       "utf8"
     );
-    console.log(newContacts);
-  } catch {}
+    return console.log(contactsArr);
+  } catch (error) {
+    console.error(error.message);
+  }
 }
 module.exports = {
   listContacts,
