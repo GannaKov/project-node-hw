@@ -13,11 +13,12 @@ async function listContacts() {
   }
 }
 
-async function getContactById(contactId) {
+async function getContactById(id) {
   try {
     const contacts = await fs.readFile(contactsPath, "utf8");
     const contactsArr = JSON.parse(contacts);
-    contactsArr.find((contact) => contact.id === contactId);
+    const oneContact = contactsArr.find((contact) => contact.id === id);
+    return console.log(oneContact || null);
   } catch (error) {
     console.error(error.message);
   }
