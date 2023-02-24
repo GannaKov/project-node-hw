@@ -1,4 +1,5 @@
-const { program } = require("commander");
+const { Command } = require("commander");
+const program = new Command();
 
 const {
   listContacts,
@@ -27,25 +28,13 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
 };
 
 program
-  .option("-a, --action, <type>")
-  .option("-i, --id, <type>")
-  .option("-n, --name, <type>")
-  .option("-e, --email, <type>")
-  .option("-p, --phone, <type>");
+  .option("-a, --action <type>", "choose action")
+  .option("-i, --id <type>", "user id")
+  .option("-n, --name <type>", "user name")
+  .option("-e, --email <type>", "user email")
+  .option("-p, --phone <type>", "user phone");
 
-program.parse();
+program.parse(process.argv);
 
-const options = program.opts();
-invokeAction(options);
-// {
-//     "id": "1",
-//     "name": "Allen Raymond",
-//     "email": "nulla.ante@vestibul.co.uk",
-//     "phone": "(992) 914-3792"
-//   },
-// {
-//     "id": "2",
-//     "name": "Chaim Lewis",
-//     "email": "dui.in@egetlacus.ca",
-//     "phone": "(294) 840-6685"
-//   },
+const argv = program.opts();
+invokeAction(argv);

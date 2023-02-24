@@ -33,8 +33,6 @@ async function removeContact(id) {
       return null;
     }
     const result = contactsArr.splice(index, 1);
-    //const contactsNew = contactsArr.filter((contact) => contact.id !== id);
-
     await fs.writeFile(contactsPath, JSON.stringify(contactsArr, null, 2));
     return console.log("result", result);
   } catch (error) {
@@ -52,9 +50,8 @@ async function addContact(name, email, phone) {
       email,
       phone,
     };
-    contactsArr.push(newContact); // const newContactsArr = [...contactsArr, contactNew];
+    contactsArr.push(newContact);
     await fs.writeFile(
-      //why not fs.appendFile(filename, data, [options])
       contactsPath,
       JSON.stringify(contactsArr, null, 2),
       "utf8"

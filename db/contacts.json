@@ -12,12 +12,6 @@
     "phone": "(294) 840-6685"
   },
   {
-    "id": "3",
-    "name": "Che Guevara",
-    "email": "che@guevara.ca",
-    "phone": "(294) 999-999"
-  },
-  {
     "id": "4",
     "name": "Wylie Pope",
     "email": "est@utquamvel.net",
@@ -60,27 +54,15 @@
     "phone": "(748) 206-2688"
   },
   {
-    "id": "2hFrbSuTRe4tW3FXeY7ypn",
+    "id": "jmFu3AQk3eW4NNbU2rpFHj",
+    "name": "Karla",
+    "email": "kkkk@kkkk.ca",
+    "phone": "(098) 323 3232"
+  },
+  {
+    "id": "anNxDNMCbGdKnwm2HjGVnM",
     "name": "Mango",
     "email": "mango@gmail.com",
     "phone": "322-22-22"
-  },
-  {
-    "id": "ckH7kmHjrYAyDizrRjFgbf",
-    "name": "Luisa",
-    "email": "fff@fff.com",
-    "phone": "333"
-  },
-  {
-    "id": "mVnMqErPceXTAwbwR2cMP2",
-    "name": "Luisa",
-    "email": "fff@fff.com",
-    "phone": "333"
-  },
-  {
-    "id": "rbWgDF5G9b81whCmbaDunj",
-    "name": "Luisa",
-    "email": "fff@fff.com",
-    "phone": "333"
   }
 ]
